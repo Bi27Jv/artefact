@@ -26,7 +26,7 @@
                         <span class="navbar-text me-3">
                             Hello, @User.Identity.Name
                         </span>
-                        <a asp-page="/Account/Logout" class="btn btn-outline-danger btn-sm">Logout</a>
+                        <a asp-page="/Account/Logout" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
                     }
                     else
                     {
