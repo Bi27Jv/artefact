@@ -88,5 +88,12 @@
         </div>
     </div>
 
+    <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('message') == 'registered') {
+                alert('Account Created Successfully, you can now log in.');
+            }
+    </script>
+
 </body>
 </html>
