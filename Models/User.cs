@@ -7,6 +7,7 @@
         public string Email { get; set; }
         public string PasswordEncrypted { get; set; }
 
-
+        // Navigation property to the user's related projects
+        public ICollection<Project> Projects { get; set; } = new List<Project>();
     }
 }

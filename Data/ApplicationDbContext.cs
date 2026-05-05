@@ -11,13 +11,21 @@ namespace artefact.Data
 
         // Define DbSet for models below:
         public DbSet<User> Users { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
-        // Context below prevents duplicate email adresses in the Users table:
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Context below prevents duplicate email adresses in the Users table:
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            // Context below creates a one-to-many relationship, where one user can have many projects, and a project belongs to one user.
+            modelBuilder.Entity<Project>()
+                .HasOne(P => P.User)
+                .WithMany(u => u.Projects)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
