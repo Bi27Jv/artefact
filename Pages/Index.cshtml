@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model artefact.Pages.IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
@@ -32,7 +32,7 @@
             justify-content: space-between;
         }
 
-        .unknown-card {
+        .page-card {
             background-color: #ffffff;
             border-radius: 12px;
             padding: 2.5rem;
@@ -43,17 +43,57 @@
     </style>
 </head>
 <body>
-    <div class="d-flex justify-content-center align-items-center flex-grow-1">
-        <div class="unknown-card">
-            <h1 class="text-center fw-bold mb-3">Welcome to the Project Managment Portal</h1>
-            <p class="text-center">please login to view and manage projects</p>
-            <div class="text-center">
-                <a asp-page="/Account/Login" class="btn btn-primary btn-lg me-2">Login</a>
-                <a asp-page="/Account/Register" class="btn btn-primary btn-lg me-2">Register an Account</a>
+    <!-- Checks whether the user is logged in or not -->
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <div class="container m-4">
+            <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                <h2 class="text-center">My Projects:</h2>
+                <a asp-page="/Projects/Create" class="btn btn-primary">+ Create New Project</a>
+            </div>
+            <!-- In case the user has not created any projects yet -->
+            @if (Model.Projects.Count == 0)
+                {
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="text-center">
+                        <p>No projects found.</p>
+                        <a asp-page="/Projects/Create" class="btn btn-primary btn-lg">Create your first project</a>
+                    </div>
+                </div>
+                }
+            <!-- If the user is logged in, and has availble projects, the site will then display them all in a grid -->
+            else
+                {
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        @foreach (var project in Model.Projects)
+                        {
+                            <div class="col">
+                                <a asp-page="/Projects/Manage" asp-route-id="@project.Id" class="page-card">
+                                    <h5 class="mb-2">@project.Name</h5>
+                                    <p class="mb-2">@project.Description</p>
+                                    <small>Created: @project.CreatedDate.ToString("dd MMM yyyy")</small>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                }
+
+        </div>
+    }
+    <!-- If the user is not logged in, they will be greeted with a welcome message and prompted to create an account -->
+    else
+    {
+        <div class="d-flex justify-content-center align-items-center flex-grow-1">
+            <div class="page-card">
+                <h1 class="text-center fw-bold mb-3">Welcome to the Project Managment Portal</h1>
+                <p class="text-center">please login to view and manage projects</p>
+                <div class="text-center">
+                    <a asp-page="/Account/Login" class="btn btn-primary btn-lg me-2">Login</a>
+                    <a asp-page="/Account/Register" class="btn btn-primary btn-lg me-2">Register an Account</a>
+                </div>
             </div>
         </div>
-    </div>
-
+    }
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('message') == 'loggedout') {
