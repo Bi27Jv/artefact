@@ -8,7 +8,7 @@
 
         public string Description { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         // Foreign key to User, connects a project to its creator
         public int UserId { get; set; }

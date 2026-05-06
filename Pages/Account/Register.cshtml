@@ -2,7 +2,6 @@
 @model artefact.Pages.Account.RegisterModel
 @{
     ViewData["Title"] = "Register";
-    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -44,15 +43,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Bar manually included because Layout = null,
-         This is done so the background image can cover the entire page including behind the navbar.
-    -->
-    <div class="register-navbar">
-        <div style="width: 80%;">
-            <span class="fw-bold fs-4">Project Management Portal</span>
-        </div>
-    </div>
-
     <div class="d-flex justify-content-center align-items-center flex-grow-1">
         <div class="register-card">
             <h2 class="text-center mb-4">Register an Account</h2>
