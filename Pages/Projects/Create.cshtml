@@ -47,9 +47,31 @@
 
     <div class="d-flex justify-content-center align-items-center flex-grow-1">
         <div class="page-card">
-            <h2 class="text-center mb-4">Page Title</h2>
+            <h2 class="text-center mb-4">Create new Project</h2>
 
+            <form method="post">
+                <!-- Used to throw an error when something goes wrong -->
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
+                <!-- Project Name Input -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Project Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Project Description Input-->
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Create Project</button>
+            </form>
+
+            <p class="mt-3 text-center">
+                <a asp-page="/Index">Cancel</a>
+            </p>
         </div>
     </div>
 
