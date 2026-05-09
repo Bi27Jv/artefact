@@ -13,5 +13,8 @@
         // Foreign key to User, connects a project to its creator
         public int UserId { get; set; }
         public User User { get; set; } = null!;
+
+        // Navigation Property so Content relates to its Project
+        public ICollection<ProjectContent> Contents { get; set; } = new List<ProjectContent>();
     }
 }

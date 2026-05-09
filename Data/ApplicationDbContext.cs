@@ -26,6 +26,13 @@ namespace artefact.Data
                 .WithMany(u => u.Projects)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Context below creates a one-to-many relationship, where one project can have many contents, and content belongs to one project.
+            modelBuilder.Entity<ProjectContent>()
+                .HasOne(u => u.Project)
+                .WithMany(p => p.Contents)
+                .HasForeignKey(U => U.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
