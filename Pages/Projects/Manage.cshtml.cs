@@ -95,12 +95,12 @@ namespace artefact.Pages.Projects
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var content = await _db.ProjectContents.FindAsync(id);
+            var project = await _db.Projects.FindAsync(id);
 
-            if (content == null || content.Project.UserId != userId)
+            if (project == null || project.UserId != userId)
                 return NotFound();
 
-            _db.Projects.Remove(Project);
+            _db.Projects.Remove(project);
             await _db.SaveChangesAsync();
             return RedirectToPage("/Index");
         }
