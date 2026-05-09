@@ -13,6 +13,8 @@ namespace artefact.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<ProjectContent> ProjectContents { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Context below prevents duplicate email adresses in the Users table:
@@ -31,7 +33,7 @@ namespace artefact.Data
             modelBuilder.Entity<ProjectContent>()
                 .HasOne(u => u.Project)
                 .WithMany(p => p.Contents)
-                .HasForeignKey(U => U.ProjectId)
+                .HasForeignKey(u => u.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
