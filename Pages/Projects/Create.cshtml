@@ -1,0 +1,71 @@
+﻿@page
+@model artefact.Pages.Projects.CreateModel
+@{
+    ViewData["Title"] = "Create Project";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Create Project</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+            body {
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                background: url('/images/create-background.svg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .page-card {
+                background-color: #ffffff;
+                border-radius: 12px;
+                padding: 2.5rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                width: 100%;
+                max-width: 420px;
+                border: 2px solid #000000;
+            }
+    </style>
+</head>
+<body>
+
+
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <div class="page-card">
+            <h2 class="text-center mb-4">Create new Project</h2>
+
+            <form method="post">
+                <!-- Used to throw an error when something goes wrong -->
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Project Name Input -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Project Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Project Description Input-->
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Create Project</button>
+            </form>
+
+            <p class="mt-3 text-center">
+                <a asp-page="/Index">Cancel</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

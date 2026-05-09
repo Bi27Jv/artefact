@@ -1,10 +1,125 @@
 ﻿@page
-@model IndexModel
+@model artefact.Pages.IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Doesn't use the !DOCTYPE html tag because it breaks the page, loads sections from the index template in _Layout.cshtml -->
+<!-- Append, the issue was actually because I had included a comment within the 'if' statement, just before the 'else' -->
+@section Styles 
+{
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('/images/index-background.svg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 420px;
+            border: 2px solid #000000;
+        }
+
+        .header-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border: 2px solid #000000;
+        }
+
+        .project-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+            border: 2px solid #000000;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            color: inherit;
+        }
+    </style>
+}
+
+<!-- Checks whether the user is logged in or not -->
+@if (User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <div class="container mt-4">
+        <div class="header-card">
+            <h2 class="mb-0">My Projects:</h2>
+            <a asp-page="/Projects/Create" class="btn btn-primary">+ Create New Project</a>
+        </div>
+        <!-- In case the user has not created any projects yet -->
+        @if (Model.Projects.Count == 0)
+        {
+            <div class="d-flex justify-content-center align-items-center mt-4">
+                <div class="page-card text-center">
+                    <p>No projects found.</p>
+                    <a asp-page="/Projects/Create" class="btn btn-primary btn-lg">Create your first project</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                @foreach (var project in Model.Projects)
+                {
+                    <div class="col-md-4">
+                        <a asp-page="/Projects/Manage" asp-route-id="@project.Id" class="project-card">
+                            <h5 class="mb-2">@project.Name</h5>
+                            <p class="mb-2">@project.Description</p>
+                            <small>Created: @project.CreatedDate.ToString("dd MMM yyyy")</small>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <div class="page-card">
+            <h1 class="text-center fw-bold mb-3">Welcome to the Project Managment Portal</h1>
+            <p class="text-center">please login to view and manage projects</p>
+            <div class="text-center">
+                <a asp-page="/Account/Login" class="btn btn-primary btn-lg me-2">Login</a>
+                <a asp-page="/Account/Register" class="btn btn-primary btn-lg me-2">Register an Account</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('message') == 'loggedout') {
+            alert('You have been logged out successfully.');
+        }
+    </script>
+}

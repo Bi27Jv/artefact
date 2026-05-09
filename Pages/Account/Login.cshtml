@@ -1,0 +1,80 @@
+﻿@page
+@model artefact.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('/images/login-background.svg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 420px;
+            border: 2px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <div class="page-card">
+            <h2 class="text-center mb-4">Login</h2>
+
+            <form method="post">
+                <!-- Used to throw an error when something goes wrong -->
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Email Input -->
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="name@emailprovider.com" />
+                    <!-- Throws an error when 'Email' is left empty as it is set to [Required] -->
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <!-- Password Input -->
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Your password" />
+                    <!-- Throws an error when 'Password' is left empty as it is set to [Required] -->
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+
+            <!-- Link to Registration page -->
+            <p class="mt-3 text-center">
+                Don't have an account? <a asp-page="/Account/Register">Register here</a>.   
+            </p>
+        </div>
+    </div>
+
+    <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('message') == 'registered') {
+                alert('Account Created Successfully, you can now log in.');
+            }
+    </script>
+
+</body>
+</html>

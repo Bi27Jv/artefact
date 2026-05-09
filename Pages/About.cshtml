@@ -1,0 +1,51 @@
+﻿@page
+@model artefact.Pages.AboutModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>About Us</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: url('/images/about-background.svg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 420px;
+            border: 2px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <div class="page-card">
+            <h2 class="text-center mb-4">About Us</h2>
+            <p class="text-center mb-4">This is the artefact for CET 3011 (Computing Project) Assignment 2.</p>
+            <p class="text-center bm-4">The project that I chose was "A web-based projects managing and report portal".</p>
+            <p class ="text-center mb-4">Supervised by:</p>
+            <p class ="text-center mb-4">Yongqiang Cheng - Yongqiang.Cheng@sunderland.ac.uk</p>
+            <p class ="text-center mb-4">Developed by:</p>
+            <p class ="text-center mb-4">Jack Cross - Bi27Jv@student.sunderland.ac.uk</p>
+        </div>
+    </div>
+
+</body>
+</html>
