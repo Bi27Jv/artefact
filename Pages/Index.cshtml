@@ -5,6 +5,7 @@
 }
 
 <!-- Doesn't use the !DOCTYPE html tag because it breaks the page, loads sections from the index template in _Layout.cshtml -->
+<!-- Append, the issue was actually because I had included a comment within the 'if' statement, just before the 'else' -->
 @section Styles 
 {
     <style>
@@ -27,6 +28,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 420px;
+            border: 2px solid #000000;
         }
 
         .header-card {
@@ -38,6 +40,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
+            border: 2px solid #000000;
         }
 
         .project-card {
@@ -50,6 +53,7 @@
             color: inherit;
             display: block;
             height: 100%;
+            border: 2px solid #000000;
         }
 
         .project-card:hover {
@@ -71,8 +75,8 @@
         <!-- In case the user has not created any projects yet -->
         @if (Model.Projects.Count == 0)
         {
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="text-center">
+            <div class="d-flex justify-content-center align-items-center mt-4">
+                <div class="page-card text-center">
                     <p>No projects found.</p>
                     <a asp-page="/Projects/Create" class="btn btn-primary btn-lg">Create your first project</a>
                 </div>
