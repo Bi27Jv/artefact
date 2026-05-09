@@ -14,9 +14,9 @@ The application uses SQLite to create local database files for storing user and 
 Sensitive information such as passwords are encrypted before being stored in the database using a Bcrypt hash.
 
 Included 'test' accounts:
-- Email: test@example.com, Password: test1234
-- Email: Jack@email.com, Password: Jack1234
-- Email: Yongqiang@testing.co.uk, Password: Yongqiang1234
+- Username: test, Email: test@example.com, Password: test1234
+- Username: Jack, Email: Jack@email.com, Password: Jack1234
+- Username: Yongiang Cheng, Email: Yongqiang@testing.co.uk, Password: Yongqiang1234
 
 Instructions to run the code:
 1. Clone the repository to your local machine.
