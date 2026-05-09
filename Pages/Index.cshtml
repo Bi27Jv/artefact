@@ -4,12 +4,9 @@
     ViewData["Title"] = "Home page";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Home</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<!-- Doesn't use the !DOCTYPE html tag because it breaks the page, loads sections from the index template in _Layout.cshtml -->
+@section Styles 
+{
     <style>
         body {
             margin: 0;
@@ -31,65 +28,94 @@
             width: 100%;
             max-width: 420px;
         }
-    </style>
-</head>
-<body>
-    <!-- Checks whether the user is logged in or not -->
-    @if (User.Identity != null && User.Identity.IsAuthenticated)
-    {
-        <div class="container m-4">
-            <div class="d-flex justify-content-center align-items-center flex-grow-1">
-                <h2 class="text-center">My Projects:</h2>
-                <a asp-page="/Projects/Create" class="btn btn-primary">+ Create New Project</a>
-            </div>
-            <!-- In case the user has not created any projects yet -->
-            @if (Model.Projects.Count == 0)
-                {
-                <div class="d-flex justify-content-center align-items-center">
-                    <div class="text-center">
-                        <p>No projects found.</p>
-                        <a asp-page="/Projects/Create" class="btn btn-primary btn-lg">Create your first project</a>
-                    </div>
-                </div>
-                }
-            <!-- If the user is logged in, and has availble projects, the site will then display them all in a grid -->
-            else
-                {
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
-                        @foreach (var project in Model.Projects)
-                        {
-                            <div class="col">
-                                <a asp-page="/Projects/Manage" asp-route-id="@project.Id" class="page-card">
-                                    <h5 class="mb-2">@project.Name</h5>
-                                    <p class="mb-2">@project.Description</p>
-                                    <small>Created: @project.CreatedDate.ToString("dd MMM yyyy")</small>
-                                </a>
-                            </div>
-                        }
-                    </div>
-                }
 
+        .header-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            color: inherit;
+        }
+    </style>
+}
+
+<!-- Checks whether the user is logged in or not -->
+@if (User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <div class="container mt-4">
+        <div class="header-card">
+            <h2 class="mb-0">My Projects:</h2>
+            <a asp-page="/Projects/Create" class="btn btn-primary">+ Create New Project</a>
         </div>
-    }
-    <!-- If the user is not logged in, they will be greeted with a welcome message and prompted to create an account -->
-    else
-    {
-        <div class="d-flex justify-content-center align-items-center flex-grow-1">
-            <div class="page-card">
-                <h1 class="text-center fw-bold mb-3">Welcome to the Project Managment Portal</h1>
-                <p class="text-center">please login to view and manage projects</p>
+        <!-- In case the user has not created any projects yet -->
+        @if (Model.Projects.Count == 0)
+        {
+            <div class="d-flex justify-content-center align-items-center">
                 <div class="text-center">
-                    <a asp-page="/Account/Login" class="btn btn-primary btn-lg me-2">Login</a>
-                    <a asp-page="/Account/Register" class="btn btn-primary btn-lg me-2">Register an Account</a>
+                    <p>No projects found.</p>
+                    <a asp-page="/Projects/Create" class="btn btn-primary btn-lg">Create your first project</a>
                 </div>
             </div>
+        }
+        else
+        {
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                @foreach (var project in Model.Projects)
+                {
+                    <div class="col-md-4">
+                        <a asp-page="/Projects/Manage" asp-route-id="@project.Id" class="project-card">
+                            <h5 class="mb-2">@project.Name</h5>
+                            <p class="mb-2">@project.Description</p>
+                            <small>Created: @project.CreatedDate.ToString("dd MMM yyyy")</small>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <div class="page-card">
+            <h1 class="text-center fw-bold mb-3">Welcome to the Project Managment Portal</h1>
+            <p class="text-center">please login to view and manage projects</p>
+            <div class="text-center">
+                <a asp-page="/Account/Login" class="btn btn-primary btn-lg me-2">Login</a>
+                <a asp-page="/Account/Register" class="btn btn-primary btn-lg me-2">Register an Account</a>
+            </div>
         </div>
-    }
+    </div>
+}
+
+@section Scripts
+{
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('message') == 'loggedout') {
             alert('You have been logged out successfully.');
         }
     </script>
-</body>
-</html>
+}

@@ -23,7 +23,7 @@ namespace artefact.Pages
             {
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 Projects = await _db.Projects
-                    .Where(p => p.Id == userId)
+                    .Where(p => p.UserId == userId)
                     .OrderByDescending(p => p.CreatedDate)
                     .ToListAsync();
             }
