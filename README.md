@@ -1,26 +1,28 @@
 This is my artefact for CET3011 Assignments 1&2.
 
-TODO:
-1.
-start work on Account pages framework:
-Pages/Account/Login.cshtml
-Pages/Account/Logout.cshtml	
-Pages/Account/Register.cshtml
+Pre-requisites:
+- Visual Studio 2022 or later
+- .NET 8.0 SDK (Available at https://dotnet.microsoft.com/download/dotnet/8.0)
+- NuGet packages (will be restored automatically when building the solution):
+  - Microsoft.EntityFrameworkCore 8.0.11
+  - Microsoft.EntityFrameworkCore.Sqlite 8.0.11
+  - Microsoft.EntityFrameworkCore.Tools 8.0.11
+  - BCrypt.Net-Next 4.1.0
 
-2. 
-Complete connected page logic:
-Pages/Account/Logout.cshtml.cs
-Pages/Account/Login.cshtml.cs
-Pages/Account/Register.cshtml.cs
+Database:
+The application uses SQLite to create local database files for storing user and project information.
+Sensitive information such as passwords are encrypted before being stored in the database using a Bcrypt hash.
 
-3. 
-Create project management home page
+Included 'test' accounts:
+- Email: test@example.com, Password: test1234
+- Email: Jack@email.com, Password: Jack1234
+- Email: Yongqiang@testing.co.uk, Password: Yongqiang1234
 
-4. 
-Impliment CRUD operations for projects
-
-5.
-Impliment file upload and download for projects
-
-6.
-Impliment Collaboration features for projects
+Instructions to run the code:
+1. Clone the repository to your local machine.
+2. Open "Artefact.sln" in Visual Studio.
+3. Press F5 to build and run the solution.
+4. Follow the prompts to register an account
+5. Log in with a registered account
+6. Create a new project
+7. Create project updates and view them in the project dashboard
