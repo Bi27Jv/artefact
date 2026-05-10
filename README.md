@@ -16,7 +16,6 @@ Sensitive information such as passwords are encrypted before being stored in the
 Included 'test' accounts:
 - Username: test, Email: test@example.com, Password: test1234
 - Username: Jack, Email: Jack@email.com, Password: Jack1234
-- Username: Yongiang Cheng, Email: Yongqiang@testing.co.uk, Password: Yongqiang1234
 
 Instructions to run the code:
 1. Clone the repository to your local machine.
